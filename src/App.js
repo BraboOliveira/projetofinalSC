@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import  './components/table.css'
 import { DataGrid } from '@material-ui/data-grid';
+import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
+import { flexbox } from '@material-ui/system';
 const axios = require('axios');
 
 function App() {
@@ -99,7 +102,7 @@ const rows = [
       <tbody className="table">
       {dadosLength != null ?  <MyList/> : "Aguarde obtendo informações..." }
       </tbody> */}
-      <div style={{ height: 400, width: '100%' }}>
+      <div style={{ height: 300, width: '100%'}}>
         <p style={{ height: 50, width: '100%', textAlign: 'center'}}>COMUNICANET</p>
       <DataGrid
         rows={dados}
@@ -107,6 +110,31 @@ const rows = [
         pageSize={5}
         disableSelectionOnClick
       />
+      <Box flexDirection="row" display="flex" justifyContent="center">
+      <div style={{ padding: 10}}>
+        <p style={{ height: 50, width: '100%', textAlign: 'center', padding: 10}}>Equipamento 01</p>
+        <Button onClick={() => { alert('Ligando equipamento 01') }} variant="contained" color="primary">
+          Liga
+        </Button>
+        <Button onClick={() => { alert('Desligando equipamento 01') }} variant="contained" color="secondary">
+          Desliga
+        </Button>
+      </div>
+      <div style={{ padding: 10}}>
+        <p style={{ height: 50, width: '100%', textAlign: 'center', padding: 10}}>Equipamento 02</p>
+        <Button onClick={() => { alert('Ligando equipamento 02') }} variant="contained" color="primary">
+          Liga
+        </Button>
+        <Button onClick={() => { alert('Desligando equipamento 02') }} variant="contained" color="secondary">
+          Desliga
+        </Button>
+      </div>
+      </Box>
+      <div style={{ textAlign: 'center', padding: 200}}>
+        <Button onClick={() => { alert('Apagando dados do Banco') }} variant="contained" color="secondary">
+          Apagar Dados
+        </Button>
+      </div>
     </div>
     </>
   );
