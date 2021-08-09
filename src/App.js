@@ -10,7 +10,9 @@ const axios = require('axios');
 
 function App() {
   const [dados, setdados] = useState([])
+  const [auto, setAuto] = useState([{'id': '1','auto1':'1','auto2': '1'}])
   let [dadosLength, setDadosLength] = useState(null);
+
   useEffect(() => {
     const timer1 = setTimeout(() => {
       axios.get('https://vendebelem.com/php-react/all-users.php')
@@ -40,6 +42,18 @@ function App() {
     }
   }, [])
 
+  const updateState = () => {
+    console.log(auto[0])
+    axios.post('https://vendebelem.com/php-react/update-user.php',auto[0])
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+  }
+
   const columns = [
   { field: 'id', headerName: 'ID', width: 200 },
   {
@@ -54,18 +68,6 @@ function App() {
     width: 200,
     editable: true,
   },
-];
-
-const rows = [
-  { id: 1, codigo: 'A1XXXXXXXXXXXXXXXE5', data: '05/06/21 11:00', age: 35 },
-  { id: 2, codigo: 'A1XXXXXXXXXXXXXXXE5', data: '05/06/21 11:00', age: 42 },
-  { id: 3, codigo: 'A1XXXXXXXXXXXXXXXE5', data: '05/06/21 11:00', age: 45 },
-  { id: 4, codigo: 'A1XXXXXXXXXXXXXXXE5', data: '05/06/21 11:00', age: 16 },
-  { id: 5, codigo: 'A1XXXXXXXXXXXXXXXE5', data: '05/06/21 11:00', age: null },
-  { id: 6, codigo: 'A1XXXXXXXXXXXXXXXE5', data: null, age: 150 },
-  { id: 7, codigo: 'A1XXXXXXXXXXXXXXXE5', data: '05/06/21 11:00', age: 44 },
-  { id: 8, codigo: 'A1XXXXXXXXXXXXXXXE5', data: '05/06/21 11:00', age: 36 },
-  { id: 9, codigo: 'A1XXXXXXXXXXXXXXXE5', data: '05/06/21 11:00', age: 65 },
 ];
 
   const Item =(data)=> {
@@ -100,7 +102,7 @@ const rows = [
           </thead>
       </table>
       <tbody className="table">
-      {dadosLength != null ?  <MyList/> : "Aguarde obtendo informações..." }
+      {dadosLength !== null ?  <MyList/> : "Aguarde obtendo informações..." }
       </tbody> */}
       <div style={{ height: 300, width: '100%'}}>
         <p style={{ height: 50, width: '100%', textAlign: 'center'}}>COMUNICANET</p>
@@ -113,19 +115,19 @@ const rows = [
       <Box flexDirection="row" display="flex" justifyContent="center">
       <div style={{ padding: 10}}>
         <p style={{ height: 50, width: '100%', textAlign: 'center', padding: 10}}>Equipamento 01</p>
-        <Button onClick={() => { alert('Ligando equipamento 01') }} variant="contained" color="primary">
+        <Button onClick={() => {  setAuto([{'id': '1','auto1':'0','auto2': '0'}]);updateState()}} variant="contained" color="primary">
           Liga
         </Button>
-        <Button onClick={() => { alert('Desligando equipamento 01') }} variant="contained" color="secondary">
+        <Button onClick={() => { setAuto([{'id': '1','auto1':'0','auto2': '0'}]); updateState()}} variant="contained" color="secondary">
           Desliga
         </Button>
       </div>
       <div style={{ padding: 10}}>
         <p style={{ height: 50, width: '100%', textAlign: 'center', padding: 10}}>Equipamento 02</p>
-        <Button onClick={() => { alert('Ligando equipamento 02') }} variant="contained" color="primary">
+        <Button onClick={() => { setAuto([{'id': '1','auto1':'0','auto2': '0'}]); updateState()}} variant="contained" color="primary">
           Liga
         </Button>
-        <Button onClick={() => { alert('Desligando equipamento 02') }} variant="contained" color="secondary">
+        <Button onClick={() => { setAuto([{'id': '1','auto1':'0','auto2': '0'}]); updateState()}} variant="contained" color="secondary">
           Desliga
         </Button>
       </div>
