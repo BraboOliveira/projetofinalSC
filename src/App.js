@@ -10,7 +10,7 @@ const axios = require('axios');
 
 function App() {
   const [dados, setdados] = useState([])
-  const [auto, setAuto] = useState([{'id': '1','auto1':'1','auto2': '1'}])
+  const [auto, setAuto] = useState({id: '1',auto1:'1',auto2: '1'})
   let [dadosLength, setDadosLength] = useState(null);
 
   useEffect(() => {
@@ -42,9 +42,20 @@ function App() {
     }
   }, [])
 
-  const updateState = () => {
-    console.log(auto[0])
-    axios.post('https://vendebelem.com/php-react/update-user.php',auto[0])
+  // const updateState = () => {
+  //   console.log(JSON.stringify(auto))
+  //   axios.post('https://vendebelem.com/php-react/update-user.php',JSON.stringify(auto))
+  //   .then(function (response) {
+  //     console.log(response)
+  //   })
+  //   .catch(function (error) {
+  //     // handle error
+  //     console.log(error);
+  //   })
+  // }
+  useEffect(() => {
+    console.log(JSON.stringify(auto))
+    axios.post('https://vendebelem.com/php-react/update-user.php',JSON.stringify(auto))
     .then(function (response) {
       console.log(response)
     })
@@ -52,7 +63,7 @@ function App() {
       // handle error
       console.log(error);
     })
-  }
+  }, [auto])
 
   const columns = [
   { field: 'id', headerName: 'ID', width: 200 },
@@ -115,19 +126,27 @@ function App() {
       <Box flexDirection="row" display="flex" justifyContent="center">
       <div style={{ padding: 10}}>
         <p style={{ height: 50, width: '100%', textAlign: 'center', padding: 10}}>Equipamento 01</p>
-        <Button onClick={() => {  setAuto([{'id': '1','auto1':'0','auto2': '0'}]);updateState()}} variant="contained" color="primary">
+        <Button onClick={() => { 
+          setAuto({id:auto.id, auto1:'2', auto2:auto.auto2});
+          }} variant="contained" color="primary">
           Liga
         </Button>
-        <Button onClick={() => { setAuto([{'id': '1','auto1':'0','auto2': '0'}]); updateState()}} variant="contained" color="secondary">
+        <Button onClick={() => {
+          setAuto({id:auto.id, auto1:'1', auto2:auto.auto2});
+          }} variant="contained" color="secondary">
           Desliga
         </Button>
       </div>
       <div style={{ padding: 10}}>
         <p style={{ height: 50, width: '100%', textAlign: 'center', padding: 10}}>Equipamento 02</p>
-        <Button onClick={() => { setAuto([{'id': '1','auto1':'0','auto2': '0'}]); updateState()}} variant="contained" color="primary">
+        <Button onClick={() => { 
+          setAuto({id: auto.id, auto1:auto.auto1, auto2:'2'});
+          }} variant="contained" color="primary">
           Liga
         </Button>
-        <Button onClick={() => { setAuto([{'id': '1','auto1':'0','auto2': '0'}]); updateState()}} variant="contained" color="secondary">
+        <Button onClick={() => { 
+          setAuto({id:auto.id, auto1:auto.auto1, auto2:'1'});
+          }} variant="contained" color="secondary">
           Desliga
         </Button>
       </div>
