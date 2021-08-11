@@ -42,17 +42,17 @@ function App() {
     }
   }, [])
 
-  // const updateState = () => {
-  //   console.log(JSON.stringify(auto))
-  //   axios.post('https://vendebelem.com/php-react/update-user.php',JSON.stringify(auto))
-  //   .then(function (response) {
-  //     console.log(response)
-  //   })
-  //   .catch(function (error) {
-  //     // handle error
-  //     console.log(error);
-  //   })
-  // }
+  const apagar = () => {
+    axios.post('http://comunicanet.online/php-react/delete-user.php')
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+  }
+
   useEffect(() => {
     console.log(JSON.stringify(auto))
     axios.post('http://comunicanet.online/php-react/update-user.php',JSON.stringify(auto))
@@ -152,7 +152,7 @@ function App() {
       </div>
       </Box>
       <div style={{ textAlign: 'center', padding: 200}}>
-        <Button onClick={() => { alert('Apagando dados do Banco') }} variant="contained" color="secondary">
+        <Button onClick={() => { apagar(); alert('Apagando dados do Banco') }} variant="contained" color="secondary">
           Apagar Dados
         </Button>
       </div>
