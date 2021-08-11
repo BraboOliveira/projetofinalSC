@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     const timer1 = setTimeout(() => {
-      axios.get('https://vendebelem.com/php-react/all-users.php')
+      axios.get('http://comunicanet.online/php-react/all-users.php')
     .then(function (response) {
       // handle success
       console.log(response.data.users.length);
@@ -55,7 +55,7 @@ function App() {
   // }
   useEffect(() => {
     console.log(JSON.stringify(auto))
-    axios.post('https://vendebelem.com/php-react/update-user.php',JSON.stringify(auto))
+    axios.post('http://comunicanet.online/php-react/update-user.php',JSON.stringify(auto))
     .then(function (response) {
       console.log(response)
     })
