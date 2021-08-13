@@ -12,15 +12,23 @@ function App() {
   const [dados, setdados] = useState([])
   const [auto, setAuto] = useState({id: '1',auto1:'1',auto2: '1'})
   let [dadosLength, setDadosLength] = useState(null);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => {
+    let timer1 = setTimeout(() => {      
+      setCount(1);
+      console.log('Atualiza')
       axios.get('http://comunicanet.online/php-react/all-users.php')
     .then(function (response) {
       // handle success
-      console.log(response.data.users.length);
-      setdados(response.data.users);
-      if(response.data.users.length != 0){
+      setCount(0);
+      console.log(response.data.success);
+      if(response.data.success == 0){
+        console.log('sem dados')
+        setdados([])
+      }
+      else setdados(response.data.users);
+      if(response.data.success != 0){
         setDadosLength(1);
       }
       else{
@@ -36,11 +44,11 @@ function App() {
       // always executed
     });
     }
-    , 1000)
+    , 5000)
     return () => {
       clearTimeout(timer1)
     }
-  }, [])
+  }, [count])
 
   const apagar = () => {
     axios.post('http://comunicanet.online/php-react/delete-user.php')
