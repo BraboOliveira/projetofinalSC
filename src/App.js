@@ -10,7 +10,7 @@ const axios = require('axios');
 
 function App() {
   const [dados, setdados] = useState([])
-  const [auto, setAuto] = useState({id: '1',auto1:'1',auto2: '1'})
+  const [auto, setAuto] = useState({})
   let [dadosLength, setDadosLength] = useState(null);
   const [count, setCount] = useState(0);
 
